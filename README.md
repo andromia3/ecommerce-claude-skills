@@ -4,6 +4,15 @@ A pack of 10 practical Claude Skills for e-commerce owners, operators, and lean 
 
 Each skill is a self-contained `SKILL.md` with triggers, required inputs, an analysis workflow, output format, and guardrails. Drop them into Claude Code and they activate automatically when their use case matches the conversation.
 
+What this repo is not:
+
+- not a collection of proven case studies
+- not an ROI calculator
+- not a live Shopify, Klaviyo, Meta Ads, or Google Ads integration
+- not a replacement for analytics, inventory planning, legal review, or human approval
+
+The first version is intentionally practical: bring exports, screenshots, URLs, reports, or pasted customer text, then use the skills to produce clearer decisions.
+
 ## What's inside
 
 | # | Skill | Folder | Purpose |
@@ -35,6 +44,18 @@ cp -r ecommerce-claude-skills/* ~/.claude/skills/
 ### Option B - Other Claude environments
 
 The skills are plain Markdown with YAML frontmatter. Paste the relevant `SKILL.md` content into context when you want to use it.
+
+## Quick start packs
+
+Use these combinations when you have a real store situation and do not know where to start.
+
+| Situation | Skills to run | Final decision you want |
+|---|---|---|
+| Pre-scale audit | Product Page Conversion Review -> Checkout Friction Finder -> Paid Traffic Waste Triage -> Inventory Risk Brief | Which products/pages are safe to scale, what must be fixed first, what not to touch |
+| Paid traffic loss diagnosis | Paid Traffic Waste Triage -> Product Page Conversion Review -> Product Feed QA -> Review and Objection Miner | Is the leak in ads, product page, offer, feed, margin, tracking, or inventory |
+| Retention deep dive | Repeat Purchase Flow Review -> Review and Objection Miner -> Support Ticket Theme Miner | What should improve second purchase, post-purchase experience, and customer education |
+| Inventory and operations review | Inventory Risk Brief -> Returns Reason Miner -> Support Ticket Theme Miner -> Weekly E-commerce Growth Readout | Which SKUs are stockout/overstock/support/return risks |
+| Weekly owner review | Weekly E-commerce Growth Readout -> whichever skill the readout flags | What changed, what matters, and the next 3 actions |
 
 ## Bring your data
 
@@ -68,6 +89,35 @@ By default these skills do not:
 - make unsupported performance claims
 
 Use them to structure diagnosis and prepare approval-ready recommendations.
+
+## Output standard
+
+Every useful output should separate evidence from hypothesis and end with a decision summary.
+
+Use these fields when a skill returns findings:
+
+| Field | Allowed values |
+|---|---|
+| Evidence | `export`, `screenshot`, `url`, `review_cluster`, `support_ticket`, `return_reason`, `policy`, `feed_diagnostics`, `margin_csv`, `inventory_export`, `hypothesis`, `needs_data` |
+| Severity | `low`, `medium`, `high`, `critical` |
+| Confidence | `low`, `medium`, `high` |
+| Business impact | `revenue`, `margin`, `cashflow`, `retention`, `conversion`, `support_load`, `risk` |
+| Effort | `XS`, `S`, `M`, `L` |
+| Owner decision | `do_now`, `test`, `investigate`, `monitor`, `ignore`, `approval_needed` |
+
+Minimum decision summary:
+
+| Finding | Evidence | Severity | Confidence | Business impact | Effort | Owner decision |
+|---|---|---|---|---|---|---|
+
+Hard rule: if the skill lacks evidence, it must mark the finding as `hypothesis` or `needs_data`, not as fact.
+
+## Examples and playbooks
+
+- Copy-paste prompts: [`examples/copy-paste-prompts.md`](examples/copy-paste-prompts.md)
+- Example outputs: [`examples/demo-outputs.md`](examples/demo-outputs.md)
+- Owner playbooks: [`playbooks/README.md`](playbooks/README.md)
+- Output quality rubric: [`references/output-standard.md`](references/output-standard.md)
 
 ## License and attribution
 

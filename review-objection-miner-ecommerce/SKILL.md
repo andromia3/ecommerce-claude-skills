@@ -62,6 +62,19 @@ Optional:
    - product improvement
 5. Prioritize repeated themes over isolated anecdotes.
 
+## Decision and evidence standard
+
+Every finding should include:
+
+- Evidence tag: `export`, `screenshot`, `url`, `review_cluster`, `support_ticket`, `return_reason`, `policy`, `feed_diagnostics`, `margin_csv`, `inventory_export`, `hypothesis`, or `needs_data`.
+- Severity: low, medium, high, or critical.
+- Confidence: low, medium, or high.
+- Business impact: revenue, margin, cashflow, retention, conversion, support_load, or risk.
+- Effort: XS, S, M, or L.
+- Owner decision: do_now, test, investigate, monitor, ignore, or approval_needed.
+
+If the evidence is weak, mark the finding as `hypothesis` or `needs_data` and lower confidence.
+
 ## Output format
 
 ### Review verdict
@@ -80,6 +93,24 @@ List objections and where to answer them.
 ### Angle ideas
 
 3-7 messaging angles tied to review evidence.
+
+## Example input and output
+
+Input:
+
+- review export
+- product facts
+- current product page URL
+- support objections
+
+Good output excerpt:
+
+| Finding | Evidence | Severity | Confidence | Business impact | Effort | Owner decision |
+|---|---|---|---|---|---|---|
+| Buyers repeatedly mention setup speed as the main value | `review_cluster` | medium | high | conversion | S | test |
+| Negative reviews cluster around compatibility confusion | `review_cluster`, `support_ticket` | high | high | conversion/support_load | M | do_now |
+
+What not to do yet: publish customer quotes unless review display rights and attribution rules are clear.
 
 ## Guardrails
 

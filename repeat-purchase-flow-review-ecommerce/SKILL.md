@@ -61,6 +61,19 @@ Optional:
 4. Find missing segments and over-message risks.
 5. Recommend the next 3 retention tests.
 
+## Decision and evidence standard
+
+Every finding should include:
+
+- Evidence tag: `export`, `screenshot`, `url`, `review_cluster`, `support_ticket`, `return_reason`, `policy`, `feed_diagnostics`, `margin_csv`, `inventory_export`, `hypothesis`, or `needs_data`.
+- Severity: low, medium, high, or critical.
+- Confidence: low, medium, or high.
+- Business impact: revenue, margin, cashflow, retention, conversion, support_load, or risk.
+- Effort: XS, S, M, or L.
+- Owner decision: do_now, test, investigate, monitor, ignore, or approval_needed.
+
+If the evidence is weak, mark the finding as `hypothesis` or `needs_data` and lower confidence.
+
 ## Output format
 
 ### Retention verdict
@@ -79,6 +92,24 @@ List product and timing hypotheses.
 ### Measurement plan
 
 Metrics to monitor for each proposed change.
+
+## Example input and output
+
+Input:
+
+- flow screenshots
+- flow performance export
+- product replenishment cycle
+- first and second order product mix
+
+Good output excerpt:
+
+| Finding | Evidence | Severity | Confidence | Business impact | Effort | Owner decision |
+|---|---|---|---|---|---|---|
+| No post-purchase education before likely second-use moment | `screenshot`, `hypothesis` | medium | low | retention/support_load | S | test |
+| Replenishment flow timing is later than the product usage cycle | `export`, `policy` | high | medium | retention | M | investigate |
+
+What not to do yet: default to discounts before checking product cycle, customer education, and cross-sell fit.
 
 ## Guardrails
 

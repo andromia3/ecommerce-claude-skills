@@ -61,6 +61,19 @@ Optional:
    - product/QC
 5. Prioritize preventable high-impact patterns.
 
+## Decision and evidence standard
+
+Every finding should include:
+
+- Evidence tag: `export`, `screenshot`, `url`, `review_cluster`, `support_ticket`, `return_reason`, `policy`, `feed_diagnostics`, `margin_csv`, `inventory_export`, `hypothesis`, or `needs_data`.
+- Severity: low, medium, high, or critical.
+- Confidence: low, medium, or high.
+- Business impact: revenue, margin, cashflow, retention, conversion, support_load, or risk.
+- Effort: XS, S, M, or L.
+- Owner decision: do_now, test, investigate, monitor, ignore, or approval_needed.
+
+If the evidence is weak, mark the finding as `hypothesis` or `needs_data` and lower confidence.
+
 ## Output format
 
 ### Returns verdict
@@ -79,6 +92,24 @@ Action list grouped by PDP, policy, fulfillment, and product.
 ### Missing data
 
 Data needed before changing policy or operations.
+
+## Example input and output
+
+Input:
+
+- returns export
+- sales by SKU for same period
+- return reason tags
+- affected product page URLs
+
+Good output excerpt:
+
+| Finding | Evidence | Severity | Confidence | Business impact | Effort | Owner decision |
+|---|---|---|---|---|---|---|
+| Sizing-related returns concentrate in one product line | `return_reason`, `export` | high | high | margin/returns | M | do_now |
+| Product images may overstate size | `url`, `hypothesis` | medium | low | returns/conversion | S | investigate |
+
+What not to do yet: tighten return policy before checking sizing, PDP clarity, fulfillment, and quality signals.
 
 ## Guardrails
 

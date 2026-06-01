@@ -65,6 +65,19 @@ Recommended columns:
    - cleanup opportunity
 4. Create a fix queue.
 
+## Decision and evidence standard
+
+Every finding should include:
+
+- Evidence tag: `export`, `screenshot`, `url`, `review_cluster`, `support_ticket`, `return_reason`, `policy`, `feed_diagnostics`, `margin_csv`, `inventory_export`, `hypothesis`, or `needs_data`.
+- Severity: low, medium, high, or critical.
+- Confidence: low, medium, or high.
+- Business impact: revenue, margin, cashflow, retention, conversion, support_load, or risk.
+- Effort: XS, S, M, or L.
+- Owner decision: do_now, test, investigate, monitor, ignore, or approval_needed.
+
+If the evidence is weak, mark the finding as `hypothesis` or `needs_data` and lower confidence.
+
 ## Output format
 
 ### Feed verdict
@@ -83,6 +96,23 @@ Reusable fixes for titles, descriptions, images, identifiers, and availability.
 ### Missing data
 
 Any columns or diagnostics needed.
+
+## Example input and output
+
+Input:
+
+- product feed CSV
+- Google Merchant Center diagnostics screenshot
+- affected product URLs
+
+Good output excerpt:
+
+| Finding | Evidence | Severity | Confidence | Business impact | Effort | Owner decision |
+|---|---|---|---|---|---|---|
+| Price mismatch between feed and landing page | `feed_diagnostics`, `url` | critical | high | revenue/risk | S | do_now |
+| Several products lack identifiers | `export`, `needs_data` | medium | medium | risk | M | investigate |
+
+What not to do yet: invent GTINs, guarantee approval, or recommend policy workarounds.
 
 ## Guardrails
 

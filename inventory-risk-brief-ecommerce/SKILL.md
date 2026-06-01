@@ -61,6 +61,19 @@ Recommended columns:
    - needs more data
 4. Tie risks to marketing action.
 
+## Decision and evidence standard
+
+Every finding should include:
+
+- Evidence tag: `export`, `screenshot`, `url`, `review_cluster`, `support_ticket`, `return_reason`, `policy`, `feed_diagnostics`, `margin_csv`, `inventory_export`, `hypothesis`, or `needs_data`.
+- Severity: low, medium, high, or critical.
+- Confidence: low, medium, or high.
+- Business impact: revenue, margin, cashflow, retention, conversion, support_load, or risk.
+- Effort: XS, S, M, or L.
+- Owner decision: do_now, test, investigate, monitor, ignore, or approval_needed.
+
+If the evidence is weak, mark the finding as `hypothesis` or `needs_data` and lower confidence.
+
 ## Output format
 
 ### Inventory verdict
@@ -79,6 +92,24 @@ Products suitable for promotion, products to protect, and products to avoid scal
 ### Missing data
 
 Fields needed for better confidence.
+
+## Example input and output
+
+Input:
+
+- inventory export
+- 60-day sales export
+- incoming stock ETA
+- promo calendar
+
+Good output excerpt:
+
+| Finding | Evidence | Severity | Confidence | Business impact | Effort | Owner decision |
+|---|---|---|---|---|---|---|
+| Bestseller SKU may stock out during planned campaign | `inventory_export`, `export` | high | medium | revenue/risk | S | approval_needed |
+| Slow-moving variant has high stock and low recent sales velocity | `inventory_export`, `export` | medium | medium | cashflow | S | test |
+
+What not to do yet: infer stock risk without inventory or sales exports, or recommend purchase orders without lead time and approval.
 
 ## Guardrails
 

@@ -57,6 +57,19 @@ Optional:
 4. Identify which issues need analytics validation.
 5. Recommend the smallest testable fix first.
 
+## Decision and evidence standard
+
+Every finding should include:
+
+- Evidence tag: `export`, `screenshot`, `url`, `review_cluster`, `support_ticket`, `return_reason`, `policy`, `feed_diagnostics`, `margin_csv`, `inventory_export`, `hypothesis`, or `needs_data`.
+- Severity: low, medium, high, or critical.
+- Confidence: low, medium, or high.
+- Business impact: revenue, margin, cashflow, retention, conversion, support_load, or risk.
+- Effort: XS, S, M, or L.
+- Owner decision: do_now, test, investigate, monitor, ignore, or approval_needed.
+
+If the evidence is weak, mark the finding as `hypothesis` or `needs_data` and lower confidence.
+
 ## Output format
 
 ### Checkout verdict
@@ -75,6 +88,24 @@ Short summary with confidence: high / medium / low.
 ### Missing data
 
 List the data needed to improve confidence.
+
+## Example input and output
+
+Input:
+
+- mobile cart screenshot
+- checkout step screenshots
+- shipping policy
+- support questions about delivery cost and delivery time
+
+Good output excerpt:
+
+| Finding | Evidence | Severity | Confidence | Business impact | Effort | Owner decision |
+|---|---|---|---|---|---|---|
+| Shipping cost appears only after contact details | `screenshot`, `policy` | high | high | conversion/support_load | S | do_now |
+| Delivery timing is unclear before payment step | `screenshot`, `support_ticket` | medium | medium | conversion | S | test |
+
+What not to do yet: promise conversion lift or redesign checkout without checking whether the platform allows the change.
 
 ## Guardrails
 

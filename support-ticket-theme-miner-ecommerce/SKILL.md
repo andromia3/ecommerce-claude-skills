@@ -63,6 +63,19 @@ Optional:
    - human escalation
 4. Prioritize by frequency, buyer impact, and operational load.
 
+## Decision and evidence standard
+
+Every finding should include:
+
+- Evidence tag: `export`, `screenshot`, `url`, `review_cluster`, `support_ticket`, `return_reason`, `policy`, `feed_diagnostics`, `margin_csv`, `inventory_export`, `hypothesis`, or `needs_data`.
+- Severity: low, medium, high, or critical.
+- Confidence: low, medium, or high.
+- Business impact: revenue, margin, cashflow, retention, conversion, support_load, or risk.
+- Effort: XS, S, M, or L.
+- Owner decision: do_now, test, investigate, monitor, ignore, or approval_needed.
+
+If the evidence is weak, mark the finding as `hypothesis` or `needs_data` and lower confidence.
+
 ## Output format
 
 ### Support verdict
@@ -81,6 +94,24 @@ FAQ, PDP, policy, and help center updates to consider.
 ### Human escalation topics
 
 Issues that should stay with a human agent.
+
+## Example input and output
+
+Input:
+
+- support ticket export
+- chat transcripts
+- policy links
+- affected product URLs
+
+Good output excerpt:
+
+| Finding | Evidence | Severity | Confidence | Business impact | Effort | Owner decision |
+|---|---|---|---|---|---|---|
+| Customers repeatedly ask whether Product A fits Product B | `support_ticket`, `url` | high | high | conversion/support_load | S | do_now |
+| Refund edge cases need human escalation | `support_ticket`, `policy` | medium | high | risk/support_load | S | approval_needed |
+
+What not to do yet: automate refunds, cancellations, or sensitive complaints by default.
 
 ## Guardrails
 

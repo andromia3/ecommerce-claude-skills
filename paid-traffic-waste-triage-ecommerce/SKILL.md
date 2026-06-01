@@ -60,6 +60,19 @@ Optional:
    - margin/inventory
 4. Recommend conservative next actions.
 
+## Decision and evidence standard
+
+Every finding should include:
+
+- Evidence tag: `export`, `screenshot`, `url`, `review_cluster`, `support_ticket`, `return_reason`, `policy`, `feed_diagnostics`, `margin_csv`, `inventory_export`, `hypothesis`, or `needs_data`.
+- Severity: low, medium, high, or critical.
+- Confidence: low, medium, or high.
+- Business impact: revenue, margin, cashflow, retention, conversion, support_load, or risk.
+- Effort: XS, S, M, or L.
+- Owner decision: do_now, test, investigate, monitor, ignore, or approval_needed.
+
+If the evidence is weak, mark the finding as `hypothesis` or `needs_data` and lower confidence.
+
 ## Output format
 
 ### Triage verdict
@@ -78,6 +91,25 @@ Group actions by ads, PDP, offer, feed, tracking, inventory, and margin.
 ### Missing data
 
 Fields needed before budget decisions.
+
+## Example input and output
+
+Input:
+
+- Meta Ads export
+- Google Ads export
+- landing page URLs
+- product margin CSV
+- inventory notes
+
+Good output excerpt:
+
+| Finding | Evidence | Severity | Confidence | Business impact | Effort | Owner decision |
+|---|---|---|---|---|---|---|
+| Campaign is scaling a low-margin SKU | `export`, `margin_csv` | high | medium | margin | S | investigate |
+| Paid traffic sends clicks to a product page with unresolved sizing objections | `export`, `review_cluster`, `url` | medium | medium | conversion/returns | M | test |
+
+What not to do yet: increase spend or pause campaigns solely from ROAS without margin, stock, and tracking context.
 
 ## Guardrails
 

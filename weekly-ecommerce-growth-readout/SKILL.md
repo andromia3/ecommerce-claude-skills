@@ -66,6 +66,19 @@ Recommended additional input:
    - seasonality
 4. Recommend 3 next actions and 3 watch items.
 
+## Decision and evidence standard
+
+Every finding should include:
+
+- Evidence tag: `export`, `screenshot`, `url`, `review_cluster`, `support_ticket`, `return_reason`, `policy`, `feed_diagnostics`, `margin_csv`, `inventory_export`, `hypothesis`, or `needs_data`.
+- Severity: low, medium, high, or critical.
+- Confidence: low, medium, or high.
+- Business impact: revenue, margin, cashflow, retention, conversion, support_load, or risk.
+- Effort: XS, S, M, or L.
+- Owner decision: do_now, test, investigate, monitor, ignore, or approval_needed.
+
+If the evidence is weak, mark the finding as `hypothesis` or `needs_data` and lower confidence.
+
 ## Output format
 
 ### Weekly verdict
@@ -92,6 +105,25 @@ Issues to monitor, not act on yet.
 ### Missing data
 
 What would make next week's readout better.
+
+## Example input and output
+
+Input:
+
+- weekly store summary
+- ad summary
+- email/SMS summary
+- inventory exceptions
+- support and returns highlights
+
+Good output excerpt:
+
+| Finding | Evidence | Severity | Confidence | Business impact | Effort | Owner decision |
+|---|---|---|---|---|---|---|
+| Revenue rose but margin confidence is low because SKU mix changed | `export`, `needs_data` | medium | low | margin | S | investigate |
+| Support tickets about delivery increased during promo week | `support_ticket`, `policy` | medium | medium | support_load/conversion | S | monitor |
+
+What not to do yet: infer causality from weekly movement without comparison period and change log.
 
 ## Guardrails
 
