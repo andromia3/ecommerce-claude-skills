@@ -104,3 +104,112 @@ Final output:
 - what matters
 - what to do next
 - what not to touch yet
+
+## 6. Profit reality check
+
+Use when revenue looks fine and the bank account does not.
+
+Run in order:
+
+1. Contribution Margin Check
+2. Shipping Economics Review
+3. Promo and Discount Impact Review
+4. Returns Reason Miner
+
+Final output:
+
+- the true cost stack per SKU
+- products that lose money before a single ad runs
+- products that lose money only after acquisition cost
+- how much margin the promo calendar gives away
+- breakeven ROAS per product for the media buyer
+
+## 7. Acquisition budget decision
+
+Use before setting CAC targets or moving budget between channels.
+
+Run in order:
+
+1. LTV and Cohort Read
+2. Contribution Margin Check
+3. Paid Traffic Waste Triage
+4. Inventory Risk Brief
+
+Final output:
+
+- what a first order can cost, in contribution not revenue
+- payback window per channel with cohort sizes stated
+- which entry product produces customers who come back
+- whether stock and cash can fund the payback window
+
+## 8. Retention and subscription rescue
+
+Use when the programme leaks and nobody has split the causes.
+
+Run in order:
+
+1. Subscription Churn Review
+2. LTV and Cohort Read
+3. Repeat Purchase Flow Review
+4. Support Ticket Theme Miner
+
+Final output:
+
+- involuntary churn size and the dunning gaps behind it
+- voluntary churn reason clusters
+- frequency mismatch against real consumption
+- missing off-ramps in the cancellation flow
+- flow changes ordered by expected effect
+
+## 9. Catalog and discoverability push
+
+Use before a marketplace push, a feed expansion, or a serious SEO and AI visibility effort.
+
+Run in order:
+
+1. Catalog Content Audit
+2. Product Feed QA
+3. AI Shopping Readiness
+4. Onsite Search and Merchandising Review
+
+Final output:
+
+- content gaps clustered by category and weighted by revenue
+- channel blockers that will fail validation
+- whether a machine reading the store gets price, availability, and policy right
+- the naming and synonym gaps the store's own visitors already expose
+
+## 10. Launch week
+
+Use in the week before anything goes live.
+
+Run in order:
+
+1. Launch Readiness Check
+2. whichever layer it marks at risk
+3. Launch Readiness Check again on the blockers only
+
+Final output:
+
+- go, go with conditions, or hold
+- blockers with owners and due times
+- oversell scenario and response
+- first-hour watch list with rollback triggers
+
+## 11. Rising disputes
+
+Use when the chargeback rate moves or a provider sends a warning.
+
+Run in order:
+
+1. Chargeback and Fraud Pattern Review
+2. Support Ticket Theme Miner
+3. Returns Reason Miner
+4. Checkout Friction Finder
+
+Final output:
+
+- disputes split into genuine fraud, service failure, and friendly fraud
+- the operational causes behind the service-failure share
+- what tightening fraud rules would cost in good orders
+- prevention queue ordered by volume addressed

@@ -1,8 +1,10 @@
 # E-commerce Operator Claude Skills
 
-A pack of 10 practical Claude Skills for e-commerce owners, operators, and lean growth teams. The skills are designed to run without live platform integrations. They work from exports, screenshots, URLs, pasted reports, reviews, tickets, and store documentation.
+A pack of 20 practical Claude Skills for e-commerce owners, operators, and lean growth teams. The skills are designed to run without live platform integrations. They work from exports, screenshots, URLs, pasted reports, reviews, tickets, and store documentation.
 
 Each skill is a self-contained `SKILL.md` with triggers, required inputs, an analysis workflow, output format, and guardrails. Drop them into Claude Code and they activate automatically when their use case matches the conversation.
+
+The pack started at 10 skills, all of them about the storefront: the page, the checkout, the feed, the traffic. Skills 11-20 cover the two things that were missing. First, the money underneath the store: margin, discounts, shipping cost, customer value over time, and disputes. Second, the store as data: a catalog reviewed at scale rather than page by page, internal search as demand signal, and whether a machine reading the store gets the product right.
 
 What this repo is not:
 
@@ -14,6 +16,8 @@ What this repo is not:
 The first version is intentionally practical: bring exports, screenshots, URLs, reports, or pasted customer text, then use the skills to produce clearer decisions.
 
 ## What's inside
+
+### Storefront and demand (1-10)
 
 | # | Skill | Folder | Purpose |
 |---|---|---|---|
@@ -28,6 +32,21 @@ The first version is intentionally practical: bring exports, screenshots, URLs, 
 | 9 | Review and Objection Miner | `review-objection-miner-ecommerce` | Extract buying triggers, objections, proof, and customer language from reviews |
 | 10 | Weekly E-commerce Growth Readout | `weekly-ecommerce-growth-readout` | Produce a weekly owner-level readout across traffic, conversion, AOV, retention, inventory, support, and returns |
 
+### Profit, retention and machine-readable store (11-20)
+
+| # | Skill | Folder | Purpose |
+|---|---|---|---|
+| 11 | Contribution Margin Check | `contribution-margin-check-ecommerce` | Build the full cost stack per SKU and find which products make money after fees, shipping, returns, and ad spend |
+| 12 | Promo and Discount Impact Review | `promo-discount-impact-review-ecommerce` | Test whether a promo added profit or pulled demand forward, and find discount leakage |
+| 13 | Shipping Economics Review | `shipping-economics-review-ecommerce` | Compare shipping charged against shipping paid, and set a defensible threshold and delivery promise |
+| 14 | LTV and Cohort Read | `ltv-cohort-read-ecommerce` | Read cohorts for repeat rate, second-order window, and payback by acquisition source |
+| 15 | Subscription Churn Review | `subscription-churn-review-ecommerce` | Split voluntary from involuntary churn and find the flow, frequency, and billing causes behind both |
+| 16 | Catalog Content Audit | `catalog-content-audit-ecommerce` | Audit product content across the whole catalog for gaps, duplicates, and channel blockers |
+| 17 | AI Shopping Readiness | `ai-shopping-readiness-ecommerce` | Check whether product data, policies, and markup can be read correctly by AI assistants and agentic checkout |
+| 18 | Chargeback and Fraud Pattern Review | `chargeback-fraud-pattern-review-ecommerce` | Separate genuine fraud from service failure and friendly fraud, and find the store-side causes |
+| 19 | Onsite Search and Merchandising Review | `onsite-search-merchandising-review-ecommerce` | Turn internal search queries and zero-result searches into merchandising and assortment decisions |
+| 20 | Launch Readiness Check | `launch-readiness-check-ecommerce` | Run a go/no-go across stock, page, checkout, feed, tracking, flows, support, and margin before traffic arrives |
+
 ## How to install
 
 ### Option A - Claude Code
@@ -38,7 +57,8 @@ The first version is intentionally practical: bring exports, screenshots, URLs, 
 
 ```bash
 git clone https://github.com/mardab96/ecommerce-claude-skills.git
-cp -r ecommerce-claude-skills/* ~/.claude/skills/
+mkdir -p ~/.claude/skills
+cp -r ecommerce-claude-skills/*ecommerce* ~/.claude/skills/
 ```
 
 ### Option B - Other Claude environments
@@ -56,6 +76,12 @@ Use these combinations when you have a real store situation and do not know wher
 | Retention deep dive | Repeat Purchase Flow Review -> Review and Objection Miner -> Support Ticket Theme Miner | What should improve second purchase, post-purchase experience, and customer education |
 | Inventory and operations review | Inventory Risk Brief -> Returns Reason Miner -> Support Ticket Theme Miner -> Weekly E-commerce Growth Readout | Which SKUs are stockout/overstock/support/return risks |
 | Weekly owner review | Weekly E-commerce Growth Readout -> whichever skill the readout flags | What changed, what matters, and the next 3 actions |
+| Profit reality check | Contribution Margin Check -> Shipping Economics Review -> Promo and Discount Impact Review | Which products and which promos actually make money after every variable cost |
+| Acquisition budget decision | LTV and Cohort Read -> Contribution Margin Check -> Paid Traffic Waste Triage | What a first order can cost, and which channel earns customers who come back |
+| Retention and subscription rescue | Subscription Churn Review -> LTV and Cohort Read -> Support Ticket Theme Miner | Whether the leak is billing, frequency, product fit, or flow design |
+| Catalog and discoverability push | Catalog Content Audit -> AI Shopping Readiness -> Product Feed QA -> Onsite Search and Merchandising Review | Whether the catalog is readable by customers, channels, and machines |
+| Pre-launch go/no-go | Launch Readiness Check -> whichever layer it flags | Go, go with conditions, or hold, with owners and a rollback plan |
+| Rising disputes | Chargeback and Fraud Pattern Review -> Support Ticket Theme Miner -> Returns Reason Miner | Whether the cause is fraud, service failure, or friendly fraud |
 
 ## Bring your data
 
@@ -73,6 +99,14 @@ They work best with:
 - support tickets or chat transcripts
 - return reason exports
 - weekly analytics summaries
+- COGS or landed cost files
+- payment provider payout and settlement reports
+- carrier invoices including surcharges
+- customer-level order history for cohorts
+- subscriber lists with cycle and status
+- dispute and chargeback exports with reason codes
+- internal site search and zero-result query exports
+- rendered product page markup
 
 ## Guardrails
 
@@ -86,7 +120,11 @@ By default these skills do not:
 - alter return policies
 - send customer messages
 - modify inventory systems
+- change prices, discounts, or shipping thresholds
+- change billing, dunning, fraud, or risk settings
+- change robots, crawl, or bot protection rules
 - make unsupported performance claims
+- promise visibility or inclusion on any AI or marketplace surface
 
 Use them to structure diagnosis and prepare approval-ready recommendations.
 
@@ -98,7 +136,7 @@ Use these fields when a skill returns findings:
 
 | Field | Allowed values |
 |---|---|
-| Evidence | `export`, `screenshot`, `url`, `review_cluster`, `support_ticket`, `return_reason`, `policy`, `feed_diagnostics`, `margin_csv`, `inventory_export`, `hypothesis`, `needs_data` |
+| Evidence | `export`, `screenshot`, `url`, `review_cluster`, `support_ticket`, `return_reason`, `policy`, `feed_diagnostics`, `margin_csv`, `inventory_export`, `cogs_export`, `payout_report`, `shipping_invoice`, `cohort_export`, `subscription_export`, `chargeback_export`, `site_search_export`, `structured_data`, `promo_calendar`, `hypothesis`, `needs_data` |
 | Severity | `low`, `medium`, `high`, `critical` |
 | Confidence | `low`, `medium`, `high` |
 | Business impact | `revenue`, `margin`, `cashflow`, `retention`, `conversion`, `support_load`, `risk` |
