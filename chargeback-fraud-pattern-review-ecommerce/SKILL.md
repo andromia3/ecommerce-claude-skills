@@ -42,6 +42,7 @@ Recommended additional input:
 
 ## Analysis workflow
 
+0. **Get the denominator right before anything else, with `../scripts/dispute_rate.py`.** A dispute filed in March belongs to the sale that happened in January, so dividing this month's disputes by this month's orders understates a rising problem. The script dates disputes by transaction where the export allows it, says so loudly when it cannot, clusters reason codes into families, and leaves anything it cannot classify visible instead of forcing it. Pass order volume with `--orders-per-month`; without it you get counts, and a count is not a rate.
 1. Trend the dispute rate over time and against order volume, and mark any policy, product, or campaign change that lines up with an inflection.
 2. Cluster disputes by product, channel, geography, order value band, and payment method.
 3. Separate the three real causes and size each: genuine fraud, service failure dressed as fraud, and friendly fraud.
@@ -52,9 +53,9 @@ Recommended additional input:
 
 ## Decision and evidence standard
 
-Tag every finding with evidence: `chargeback_export`, `export`, `payout_report`, `support_ticket`, `policy`, `screenshot`, `hypothesis`, or `needs_data`. Full vocabulary: `references/output-standard.md`.
+Tag every finding with evidence: `chargeback_export`, `export`, `payout_report`, `support_ticket`, `policy`, `screenshot`, `hypothesis`, or `needs_data`. Full vocabulary: `../references/output-standard.md`.
 
-Each finding also carries severity, confidence, business impact, effort, and owner decision.
+Rank findings by disputed value plus the fee exposure behind it, not by dispute count.
 
 Reason codes describe what the customer claimed, not what happened. Treat them as classification, not as truth, and say so.
 
@@ -84,6 +85,8 @@ What good traffic the current rules likely reject, and the cost basis for that e
 
 ### Missing data
 
+The declined-order export is the missing half of this picture. Disputes show what got through and went wrong; declines show what the rules rejected. Sizing over-blocking without them is guesswork, and it is the finding owners most want.
+
 ## Example input and output
 
 Input:
@@ -107,5 +110,5 @@ What not to do yet: tighten fraud rules across the board when most disputes are 
 - Do not treat reason codes as proof of what happened.
 - Do not recommend tightening fraud rules without estimating the cost of rejected good orders.
 - Do not give legal, compliance, or card-scheme advice. Route those questions to the provider or counsel.
-- Do not change live fraud, billing, or risk settings without approval.
+- Do not tighten a live risk rule. Rejected orders leave no trace an owner will ever review, so this is the one change in the pack whose damage is invisible after the fact.
 - Do not name or profile individual customers as fraudulent in the output.

@@ -47,6 +47,10 @@ Added with skills 11-20:
 
 ## Decision fields
 
+Every finding a skill returns carries all five of these, whatever the skill.
+Individual skills state only their own ranking rule, because that is the part
+that differs; this table is the part that does not.
+
 | Field | Values |
 |---|---|
 | Severity | `low`, `medium`, `high`, `critical` |

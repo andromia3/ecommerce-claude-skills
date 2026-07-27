@@ -1,6 +1,6 @@
 ---
 name: onsite-search-merchandising-review-ecommerce
-description: Turns internal site search queries, zero-result searches, and collection performance into merchandising, naming, and assortment decisions. Use when visitors search but do not buy, when collection pages convert poorly, or when the owner wants demand signal from their own traffic instead of keyword tools.
+description: Turns internal site search queries, zero-result searches, and collection performance into merchandising, naming, and assortment decisions. Use when visitors search but do not buy, when collection pages convert poorly, or when the owner wants demand signal from their own traffic instead of keyword tools. Requires site search logging to be switched on; without a query export there is nothing to analyse, and turning logging on is the first recommendation instead.
 ---
 
 # Onsite Search and Merchandising Review - E-commerce
@@ -52,9 +52,9 @@ Recommended additional input:
 
 ## Decision and evidence standard
 
-Tag every finding with evidence: `site_search_export`, `export`, `url`, `review_cluster`, `support_ticket`, `screenshot`, `hypothesis`, or `needs_data`. Full vocabulary: `references/output-standard.md`.
+Tag every finding with evidence: `site_search_export`, `export`, `url`, `review_cluster`, `support_ticket`, `screenshot`, `hypothesis`, or `needs_data`. Full vocabulary: `../references/output-standard.md`.
 
-Each finding also carries severity, confidence, business impact, effort, and owner decision.
+Rank findings by query volume covered per unit of work. One synonym rule that fixes a cluster outranks nine individual fixes.
 
 Query volume is a demand signal, not a revenue forecast. Do not turn search counts into projected sales.
 
@@ -84,6 +84,8 @@ Synonyms, tags, collection pages, and facets, ordered by volume covered per unit
 
 ### Missing data
 
+Say whether the search tool logs zero-result queries at all. If it does not, the most valuable half of this analysis does not exist yet, and switching logging on is the finding rather than a footnote.
+
 ## Example input and output
 
 Input:
@@ -107,5 +109,5 @@ What not to do yet: order stock against a zero-result cluster before checking wh
 - Do not turn query volume into a sales forecast.
 - Do not recommend stocking new products on search volume alone. Hand it to the owner as a decision with the evidence attached.
 - Do not act on queries below the volume floor.
-- Do not change live search, synonym, or collection configuration without approval.
+- Do not edit synonyms or collection rules directly. A bad synonym rule quietly poisons results for queries nobody is watching, and it will not show up in the search report that suggested it.
 - Do not assume search converts better in this store. Check it.

@@ -1,6 +1,6 @@
 ---
 name: subscription-churn-review-ecommerce
-description: Diagnoses subscription and replenishment churn from subscriber exports, cancellation reasons, failed payments, and flow settings. Use for subscribe-and-save, refill, or membership programmes when churn is rising, cycle-two drop-off is heavy, or involuntary churn has never been separated from voluntary.
+description: Diagnoses subscription and replenishment churn from subscriber exports, cancellation reasons, failed payments, and flow settings. Use when a store runs subscribe-and-save, refill, or membership billing and churn is rising, cycle-two drop-off is heavy, or involuntary churn has never been separated from voluntary. Only applies to stores with recurring billing; a one-off purchase store should use LTV and Cohort Read instead.
 ---
 
 # Subscription Churn Review - E-commerce
@@ -28,7 +28,7 @@ Recommended additional input:
 
 - Failed payment and dunning logs.
 - Skip, pause, swap, and delay usage.
-- Cancellation flow screenshots.
+- Cancellation flow screenshots, including which off-ramps the customer portal actually surfaces before the cancel button becomes reachable.
 - Support tickets about subscriptions.
 - Discount structure on first cycle versus later cycles.
 - Delivery timing performance.
@@ -42,6 +42,8 @@ Recommended additional input:
 
 ## Analysis workflow
 
+0. **Pull the platform's own numbers first.** Recharge, Skio, Stay AI and Shopify's native subscriptions already report cycle survival, cancellation reasons and failed-payment recovery. Start from that baseline and use this skill to interrogate it, not to re-derive it from a raw export. If the two disagree, the disagreement is itself a finding, usually about how pauses are counted.
+0b. **Then rebuild survival independently with `../scripts/subscription_survival.py`.** Run `../scripts/subscription_survival.py <file>`. It splits endings into voluntary, involuntary and paused-not-resumed, and it counts each cycle only against the subscribers who actually reached it. When your export has no churn-type column the script infers it from status and reason text and says how many rows it inferred: check that number against the billing platform before acting, because the involuntary share is what the whole analysis turns on.
 1. Build survival by cycle: what share of subscribers reach cycle 2, 3, 4, 6, and 12.
 2. Split churn into voluntary, involuntary, and pause-not-resumed. Report each separately.
 3. For involuntary churn, check the dunning setup: retry count, retry spacing, card updater, pre-dunning notice, and what the customer sees.
@@ -52,9 +54,9 @@ Recommended additional input:
 
 ## Decision and evidence standard
 
-Tag every finding with evidence: `subscription_export`, `export`, `support_ticket`, `screenshot`, `policy`, `hypothesis`, or `needs_data`. Full vocabulary: `references/output-standard.md`.
+Tag every finding with evidence: `subscription_export`, `export`, `support_ticket`, `screenshot`, `policy`, `hypothesis`, or `needs_data`. Full vocabulary: `../references/output-standard.md`.
 
-Each finding also carries severity, confidence, business impact, effort, and owner decision.
+Rank findings by recoverable subscribers rather than by cancellation count. Involuntary churn usually outranks everything else on that measure.
 
 Cancellation reason fields are self-reported. Treat them as signal, not proof, and say so.
 
@@ -84,6 +86,8 @@ Off-ramps missing from the cancellation flow, ordered by expected retention effe
 
 ### Missing data
 
+The dunning log is the input most often absent and most often decisive: without retry counts and spacing, involuntary churn can be sized but not explained. Cancellation reasons being unlogged is the second gap, and it is worth fixing before the next analysis rather than during this one.
+
 ## Example input and output
 
 Input:
@@ -108,4 +112,5 @@ What not to do yet: rebuild the offer because churn is high, when a third of it 
 - Do not treat pauses as cancellations.
 - Do not make retention harder by hiding the cancel option. Fix the reason, not the exit.
 - Do not promise a recovery percentage from dunning changes.
-- Do not change live billing, retry, or subscription settings without approval.
+- Do not treat a raw export as more authoritative than the billing platform's own reporting. Prepaid terms, plan migrations and bundled subscriptions all export in ways that make naive counts wrong.
+- Do not alter a live retry or billing schedule. These changes charge real cards on a new timetable, and the first sign of getting it wrong is a dispute, not a dashboard.

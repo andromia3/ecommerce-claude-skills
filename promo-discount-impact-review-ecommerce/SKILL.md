@@ -1,6 +1,6 @@
 ---
 name: promo-discount-impact-review-ecommerce
-description: Reviews whether a discount, sale, or promo actually added profit or simply pulled forward demand and trained customers to wait. Use after a sale period, before repeating a promo calendar, when discount codes are leaking, or when revenue is up but profit is flat.
+description: Reviews whether a discount, sale, or promo actually added profit or simply pulled forward demand and trained customers to wait. Use when a sale has just ended, when a promo calendar is about to repeat, when discount codes are leaking, or when revenue is up and profit is flat. Needs daily orders covering a baseline before and after the promo.
 ---
 
 # Promo and Discount Impact Review - E-commerce
@@ -41,6 +41,7 @@ Recommended additional input:
 
 ## Analysis workflow
 
+0. **Fix the three windows first, in code.** With a daily revenue CSV, run `../scripts/promo_impact.py <file> --promo-start <date> --promo-end <date>`. It computes baseline, promo and recovery on the same per-day footing, prices the trough, and refuses to stay quiet when ad spend also rose. Doing this comparison by hand is where the trough gets left out of the story.
 1. Compare promo window to baseline on: orders, revenue, AOV, units per order, gross margin, new customer share.
 2. Compute the margin actually given away: discount value plus incremental shipping and fee costs.
 3. Look at the days after the promo. A deep trough after the peak is pull-forward, not growth.
@@ -51,9 +52,9 @@ Recommended additional input:
 
 ## Decision and evidence standard
 
-Tag every finding with evidence: `export`, `margin_csv`, `cogs_export`, `promo_calendar`, `policy`, `support_ticket`, `hypothesis`, or `needs_data`. Full vocabulary: `references/output-standard.md`.
+Tag every finding with evidence: `export`, `margin_csv`, `cogs_export`, `promo_calendar`, `policy`, `support_ticket`, `hypothesis`, or `needs_data`. Full vocabulary: `../references/output-standard.md`.
 
-Each finding also carries severity, confidence, business impact, effort, and owner decision.
+Rank findings by margin given away rather than by revenue moved.
 
 Incremental profit claims require a defensible baseline. Without one, the finding is `hypothesis` at `low` confidence.
 
@@ -82,6 +83,8 @@ Trough depth after the window, and whether combined window plus recovery beats b
 Three to five rules for the next calendar: what mechanic, what floor margin, what audience, what exclusions.
 
 ### Missing data
+
+The two inputs that most often turn this from a story into a measurement: ad spend by day across the same window, and margin for the discounted SKUs. Without the first, lift cannot be separated from budget. Without the second, the promo can only be judged on revenue.
 
 ## Example input and output
 

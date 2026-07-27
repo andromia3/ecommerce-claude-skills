@@ -1,6 +1,6 @@
 ---
 name: returns-reason-miner-ecommerce
-description: Mines e-commerce returns exports, refund reasons, support notes, and product page data to find preventable return patterns and fixes for product pages, sizing, expectations, fulfillment, packaging, and quality.
+description: Mines e-commerce returns exports, refund reasons, support notes, and product page data to find preventable return patterns and fixes for product pages, sizing, expectations, fulfillment, packaging, and quality. Use when the return rate rises, a specific SKU returns far above the store average, or returns are being treated as a cost line instead of as feedback.
 ---
 
 # Returns Reason Miner - E-commerce

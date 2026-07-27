@@ -53,17 +53,44 @@ The first version is intentionally practical: bring exports, screenshots, URLs, 
 
 1. Clone or download this repository.
 2. Copy the skill folders into your project's `.claude/skills/` directory, or into the user-level skills directory at `~/.claude/skills/`.
-3. Start a new Claude Code session. Skills will activate automatically when their description matches the conversation.
+3. Copy `scripts/` and `references/` alongside them. Ten skills reach for those by relative path (`../scripts/margin_stack.py`, `../references/output-standard.md`), so a skills-only copy installs the skills and quietly breaks their helpers.
+4. Start a new Claude Code session. Skills will activate automatically when their description matches the conversation.
 
 ```bash
 git clone https://github.com/mardab96/ecommerce-claude-skills.git
 mkdir -p ~/.claude/skills
-cp -r ecommerce-claude-skills/*ecommerce* ~/.claude/skills/
+cp -r ecommerce-claude-skills/*ecommerce* \
+      ecommerce-claude-skills/scripts \
+      ecommerce-claude-skills/references \
+      ~/.claude/skills/
 ```
 
 ### Option B - Other Claude environments
 
 The skills are plain Markdown with YAML frontmatter. Paste the relevant `SKILL.md` content into context when you want to use it.
+
+## Start here: what you can run today
+
+Twenty skills is too many to triage on a Tuesday. This orders them by how hard
+they are to feed, not by how interesting they are. Work down the list until you
+run out of data.
+
+| Effort to feed | Skills | What you need |
+|---|---|---|
+| Nothing to export | Launch Readiness Check, Product Page Conversion Review, Checkout Friction Finder | A brief, some URLs, screenshots |
+| One export you already have | Shipping Economics Review, Chargeback and Fraud Pattern Review, Returns Reason Miner, Support Ticket Theme Miner, Review and Objection Miner, Onsite Search and Merchandising Review | One CSV from one tool |
+| One export plus a cost file | Contribution Margin Check, Inventory Risk Brief, Promo and Discount Impact Review | Sales plus COGS, which is the file most stores have to build once |
+| Needs history | LTV and Cohort Read, Subscription Churn Review | Twelve months or two purchase cycles |
+| Needs a specific setup | AI Shopping Readiness, Catalog Content Audit, Product Feed QA | Rendered page markup, or a full catalog export |
+
+If you have never run any of these, start with **Launch Readiness Check** (costs
+nothing to feed and catches the most expensive mistakes) and **Contribution
+Margin Check** (the one whose answer changes every other decision in the pack).
+
+Building the COGS file is the single most common blocker, and it unlocks four
+skills at once. [`references/getting-your-data.md`](references/getting-your-data.md)
+says where every input in this pack actually lives in Shopify, Stripe, your
+carrier account and your subscription app.
 
 ## Quick start packs
 
@@ -150,15 +177,53 @@ Minimum decision summary:
 
 Hard rule: if the skill lacks evidence, it must mark the finding as `hypothesis` or `needs_data`, not as fact.
 
+## Scripts
+
+Seven skills are arithmetic-heavy, and a model doing that arithmetic by eye
+produces numbers that look right and are not. Those seven ship deterministic
+helpers instead. Python 3 standard library only, no dependencies, no network,
+nothing written back to your files.
+
+| Script | Used by |
+|---|---|
+| [`scripts/margin_stack.py`](scripts/margin_stack.py) | Contribution Margin Check |
+| [`scripts/cohort_read.py`](scripts/cohort_read.py) | LTV and Cohort Read |
+| [`scripts/catalog_scan.py`](scripts/catalog_scan.py) | Catalog Content Audit |
+| [`scripts/promo_impact.py`](scripts/promo_impact.py) | Promo and Discount Impact Review |
+| [`scripts/shipping_recovery.py`](scripts/shipping_recovery.py) | Shipping Economics Review |
+| [`scripts/subscription_survival.py`](scripts/subscription_survival.py) | Subscription Churn Review |
+| [`scripts/dispute_rate.py`](scripts/dispute_rate.py) | Chargeback and Fraud Pattern Review |
+
+```bash
+python3 scripts/margin_stack.py products.csv --payment-fee-pct 2.9
+python3 scripts/cohort_read.py orders.csv --by source
+python3 scripts/catalog_scan.py catalog.csv
+```
+
+Details in [`scripts/README.md`](scripts/README.md). The guarantees worth
+knowing: absent cost lines are reported rather than invented, an immature cohort
+prints a dash rather than a zero, catalog counting is exhaustive or the output
+says it was sampled, a promo is never judged without its recovery period, and
+churn is never reported as one number.
+
+`scripts/validate-skills.py` checks every skill in the pack for required
+sections, an activation phrase, workflow depth and undeclared evidence tags, and
+`scripts/selftest.py` runs seventeen regression checks over the analysis scripts,
+one per bug that actually shipped. Both have a `--selftest` or self-proving mode,
+because a check nobody has seen fail is not evidence of anything.
+
 ## Examples and playbooks
 
 - Copy-paste prompts: [`examples/copy-paste-prompts.md`](examples/copy-paste-prompts.md)
-- Example outputs: [`examples/demo-outputs.md`](examples/demo-outputs.md)
+- Example outputs, including real script runs: [`examples/demo-outputs.md`](examples/demo-outputs.md)
 - Owner playbooks: [`playbooks/README.md`](playbooks/README.md)
 - Output quality rubric: [`references/output-standard.md`](references/output-standard.md)
+- Where every input actually lives in your admin panels: [`references/getting-your-data.md`](references/getting-your-data.md)
+- How the pack composes and where judgement shifts by store type: [`AGENTS.md`](AGENTS.md)
+- Version history: [`CHANGELOG.md`](CHANGELOG.md)
 
 ## License and attribution
 
-Free to use, modify, and redistribute for personal and commercial work. If you ship something built on top of these skills, a credit is appreciated but not required.
+MIT, see [`LICENSE`](LICENSE). Free to use, modify, and redistribute for personal and commercial work. If you ship something built on top of these skills, a credit is appreciated but not required.
 
 Built and maintained by [AdLume](https://adlume.co) - performance marketing infrastructure for AI-native operators.

@@ -60,6 +60,7 @@ Recommended columns:
    - do not scale traffic
    - needs more data
 4. Tie risks to marketing action.
+5. Name what cannot be decided yet. Reorder quantity needs lead time and incoming stock; a promo decision needs margin. Where those are absent, hand the owner the question rather than a recommendation built on a guess.
 
 ## Decision and evidence standard
 

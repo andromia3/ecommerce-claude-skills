@@ -40,6 +40,7 @@ Recommended additional input:
 
 ## Analysis workflow
 
+0. **The cohort table comes from `../scripts/cohort_read.py`, not from reading the export.** If the input is an order CSV, run `../scripts/cohort_read.py <file>` (add `--by source` or `--by first_product` to segment). It groups customers by first order, computes cumulative value at each horizon, prints the cohort size next to every number, and refuses to report a horizon a cohort has not lived through, printing a dash instead of a zero. That last guard is the one manual analysis gets wrong most often.
 1. Build monthly acquisition cohorts and track cumulative value per customer at 30, 60, 90, 180, and 365 days.
 2. Compute repeat rate at each horizon, and the median time between first and second order.
 3. Identify the second-order window: the period after which a customer who has not reordered rarely does. This is the window every retention flow should target.
@@ -50,9 +51,9 @@ Recommended additional input:
 
 ## Decision and evidence standard
 
-Tag every finding with evidence: `export`, `cohort_export`, `margin_csv`, `cogs_export`, `hypothesis`, or `needs_data`. Full vocabulary: `references/output-standard.md`.
+Tag every finding with evidence: `export`, `cohort_export`, `margin_csv`, `cogs_export`, `hypothesis`, or `needs_data`. Full vocabulary: `../references/output-standard.md`.
 
-Each finding also carries severity, confidence, business impact, effort, and owner decision.
+Rank findings by how much of the customer base they describe. A pattern in a segment of eleven people is a note, not a finding.
 
 Small cohorts get low confidence. Say the cohort size next to any comparison between segments.
 
@@ -81,6 +82,8 @@ Median days to second order, and the point after which reorder probability colla
 Two or three decisions this supports: bid targets, entry product, flow timing, discount policy on first orders.
 
 ### Missing data
+
+Say how many months of history the file actually holds, how many cohorts have reached each horizon, and whether guest checkout is fragmenting the same person across several customer records. All three cap what this analysis can honestly claim.
 
 ## Example input and output
 

@@ -43,6 +43,7 @@ Recommended additional input:
 
 ## Analysis workflow
 
+0. **Run `../scripts/margin_stack.py` before forming any view.** If the inputs are a CSV, run `../scripts/margin_stack.py <file> --payment-fee-pct <rate> --payment-fee-fixed <fee>`. It builds the stack per SKU, computes CM2, CM3 and breakeven ROAS exactly, and lists which cost columns were absent so they can be marked as assumptions. Reserve manual calculation for a handful of SKUs pasted into chat, and even then show the working.
 1. Build the cost stack per SKU in this order: gross revenue, discounts, returns and refunds, COGS, payment fees, platform or channel fees, shipping and fulfilment, packaging, then attributed ad spend.
 2. Produce contribution margin before ad spend (CM2) and after ad spend (CM3). Keep them separate. Most stores only ever see the first one.
 3. Rank SKUs by total contribution, not by margin percentage. A 60% margin product selling four units matters less than a 22% margin product carrying the catalog.
@@ -52,9 +53,9 @@ Recommended additional input:
 
 ## Decision and evidence standard
 
-Tag every finding with evidence: `export`, `cogs_export`, `margin_csv`, `payout_report`, `shipping_invoice`, `return_reason`, `policy`, `hypothesis`, or `needs_data`. Full vocabulary: `references/output-standard.md`.
+Tag every finding with evidence: `export`, `cogs_export`, `margin_csv`, `payout_report`, `shipping_invoice`, `return_reason`, `policy`, `hypothesis`, or `needs_data`. Full vocabulary: `../references/output-standard.md`.
 
-Each finding also carries severity, confidence, business impact, effort, and owner decision.
+Rank findings by total contribution at stake, not by margin percentage.
 
 Any cost line the user did not supply is an assumption. Assumptions get `hypothesis`, confidence `low`, and appear in the missing data list. Never present an assumed cost as a measured one.
 

@@ -1,6 +1,6 @@
 ---
 name: product-feed-qa-ecommerce
-description: Audits e-commerce product feed exports, Google Merchant Center diagnostics, catalog screenshots, and product page samples to find data quality issues that can hurt Shopping ads, catalog ads, product discovery, or approvals.
+description: Audits e-commerce product feed exports, Google Merchant Center diagnostics, catalog screenshots, and product page samples to find data quality issues that can hurt Shopping ads, catalog ads, product discovery, or approvals. Use when products are disapproved, Shopping performance drops without an obvious campaign cause, or a catalog is about to be pushed to a new channel.
 ---
 
 # Product Feed QA - E-commerce
@@ -64,6 +64,7 @@ Recommended columns:
    - performance risk
    - cleanup opportunity
 4. Create a fix queue.
+5. Separate what blocks approval from what only degrades performance, and mark which items need confirmation in Merchant Center or the channel's own diagnostics before anyone spends time on them.
 
 ## Decision and evidence standard
 

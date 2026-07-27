@@ -59,6 +59,7 @@ Optional:
    - tracking
    - margin/inventory
 4. Recommend conservative next actions.
+5. State which layers the current data cannot rule out. A triage that names one culprit while three layers remain unmeasured is a guess wearing a diagnosis, so list the unexcluded layers and the one input that would close each.
 
 ## Decision and evidence standard
 

@@ -41,6 +41,7 @@ Recommended additional input:
 
 ## Analysis workflow
 
+0. **Banding is the whole trick, and `../scripts/shipping_recovery.py` does it.** With an order CSV, run `../scripts/shipping_recovery.py <file> --threshold <current>`. It computes recovery by zone and by order value band, and tests the threshold against the real order distribution rather than against a rule of thumb. The gap is invisible in aggregate and obvious once banded, which is the whole reason this skill exists.
 1. Compute shipping recovery rate: shipping charged divided by shipping paid, overall and by zone.
 2. Find the order value bands where the store loses money on delivery, and size each band by order count.
 3. Test the free-shipping threshold against actual AOV distribution. A threshold below the current AOV mode subsidises orders that would have converted anyway.
@@ -51,9 +52,9 @@ Recommended additional input:
 
 ## Decision and evidence standard
 
-Tag every finding with evidence: `shipping_invoice`, `export`, `policy`, `margin_csv`, `support_ticket`, `return_reason`, `screenshot`, `hypothesis`, or `needs_data`. Full vocabulary: `references/output-standard.md`.
+Tag every finding with evidence: `shipping_invoice`, `export`, `policy`, `margin_csv`, `support_ticket`, `return_reason`, `screenshot`, `hypothesis`, or `needs_data`. Full vocabulary: `../references/output-standard.md`.
 
-Each finding also carries severity, confidence, business impact, effort, and owner decision.
+Rank findings by the annualised gap they represent, not by how wrong the rate looks.
 
 Any scenario is a model, not a forecast. Label projected savings as projected, with the assumptions visible.
 
@@ -83,6 +84,8 @@ Promise versus performance, and the support and return cost of the gap.
 
 ### Missing data
 
+Name which surcharge lines were legible on the invoice and which were bundled. Fuel, residential and address correction are the three that usually hide inside a single total, and a recovery rate built without them reads better than reality.
+
 ## Example input and output
 
 Input:
@@ -103,7 +106,7 @@ What not to do yet: raise the threshold sitewide before checking which SKUs depe
 
 ## Guardrails
 
-- Do not change live shipping rates or thresholds without approval.
+- Do not touch a live rate table. A threshold change is felt by every customer in the next hour and is the hardest change in this pack to walk back cleanly.
 - Do not model savings without stating the assumptions.
 - Do not ignore the conversion risk of raising a threshold or adding a fee.
 - Do not treat a single month of carrier invoices as seasonal truth.

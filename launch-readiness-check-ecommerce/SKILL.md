@@ -1,6 +1,6 @@
 ---
 name: launch-readiness-check-ecommerce
-description: Runs a go/no-go readiness check before a product launch, restock, promo, or spend increase, covering stock, page, feed, tracking, lifecycle flows, support, policy, and margin. Use before pressing go on anything that will send a wave of traffic at the store.
+description: Runs a go/no-go readiness check before a product launch, restock, promo, or spend increase, covering stock, page, feed, tracking, lifecycle flows, support, policy, and margin. Use when a launch, drop, restock or spend increase is about to go live and the cost of finding a gap afterwards is high. Works from a brief plus screenshots, so it needs no exports.
 ---
 
 # Launch Readiness Check - E-commerce
@@ -60,9 +60,9 @@ Recommended additional input:
 
 ## Decision and evidence standard
 
-Tag every finding with evidence: `url`, `screenshot`, `export`, `inventory_export`, `feed_diagnostics`, `policy`, `margin_csv`, `promo_calendar`, `hypothesis`, or `needs_data`. Full vocabulary: `references/output-standard.md`.
+Tag every finding with evidence: `url`, `screenshot`, `export`, `inventory_export`, `feed_diagnostics`, `policy`, `margin_csv`, `promo_calendar`, `hypothesis`, or `needs_data`. Full vocabulary: `../references/output-standard.md`.
 
-Each finding also carries severity, confidence, business impact, effort, and owner decision.
+Rank findings by what they would cost on launch day, not by how hard they are to fix.
 
 A layer nobody verified is `needs_data` and cannot be marked ready. Silence is not a pass.
 
@@ -92,6 +92,8 @@ What happens if demand overshoots, stock runs out, or tracking breaks, and what 
 
 ### Missing data
 
+List every layer nobody could confirm before the deadline, with the person who would have known. That list is the real risk register for launch day, and it is more useful than the layers that passed.
+
 ## Example input and output
 
 Input:
@@ -114,6 +116,6 @@ What not to do yet: mark tracking ready because it worked last month. Verify a t
 
 - Do not mark a layer ready on assumption. Unverified is `needs_data`.
 - Do not give a go verdict while a critical blocker is open, even under time pressure.
-- Do not change live campaign, promo, stock, or flow settings without approval.
+- Do not fix anything yourself during the check. The point is a list the owner can act on before the deadline, and an unannounced fix on launch morning is how two people change the same thing twice.
 - Do not promise launch performance.
 - Do not skip the oversell scenario because it feels optimistic. It is the most common launch failure.

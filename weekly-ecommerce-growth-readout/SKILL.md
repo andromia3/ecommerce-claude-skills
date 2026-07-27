@@ -65,6 +65,7 @@ Recommended additional input:
    - support/returns
    - seasonality
 4. Recommend 3 next actions and 3 watch items.
+5. Say what did not move and was expected to. A change that failed to happen after last week's action is the most useful line in a weekly readout and the one most often left out.
 
 ## Decision and evidence standard
 

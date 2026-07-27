@@ -1,6 +1,6 @@
 ---
 name: support-ticket-theme-miner-ecommerce
-description: Analyzes e-commerce support ticket exports, chat transcripts, email samples, and help center content to identify repeated questions, policy confusion, product information gaps, and automation candidates.
+description: Analyzes e-commerce support ticket exports, chat transcripts, email samples, and help center content to identify repeated questions, policy confusion, product information gaps, and automation candidates. Use when the same questions keep arriving, support load grows faster than orders, or the store wants to know which page or policy is generating its own tickets.
 ---
 
 # Support Ticket Theme Miner - E-commerce
@@ -62,6 +62,7 @@ Optional:
    - automation candidate
    - human escalation
 4. Prioritize by frequency, buyer impact, and operational load.
+5. Give every theme a denominator. A theme is a share of total tickets in a stated period, not a raw count, otherwise a busy month reads as a new problem and a quiet one hides an old one.
 
 ## Decision and evidence standard
 

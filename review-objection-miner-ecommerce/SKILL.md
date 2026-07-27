@@ -1,6 +1,6 @@
 ---
 name: review-objection-miner-ecommerce
-description: Mines product reviews, competitor reviews, support objections, and customer comments to extract buying triggers, objections, proof points, customer language, product improvement themes, and PDP or ad angle ideas.
+description: Mines product reviews, competitor reviews, support objections, and customer comments to extract buying triggers, objections, proof points, customer language, product improvement themes, and PDP or ad angle ideas. Use when writing or rewriting a product page, preparing ad angles, or trying to understand in the customer's own words why people hesitate before buying.
 ---
 
 # Review and Objection Miner - E-commerce

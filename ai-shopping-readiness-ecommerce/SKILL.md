@@ -1,6 +1,6 @@
 ---
 name: ai-shopping-readiness-ecommerce
-description: Checks whether a store's product data, policies, and structured markup can be read and represented correctly by AI shopping assistants and agentic checkout flows. Use when preparing for AI shopping surfaces, when assistants describe products or policies wrongly, or before deciding whether agentic commerce standards are worth adopting.
+description: Checks whether a store's product data, policies, and structured markup can be read and represented correctly by AI shopping assistants and agentic checkout flows. Use when preparing for AI shopping surfaces, when assistants describe products or policies wrongly, or before deciding whether agentic commerce standards are worth adopting. Requires the rendered HTML or structured data of a product page, not just its URL, unless the environment can fetch pages.
 ---
 
 # AI Shopping Readiness - E-commerce
@@ -52,9 +52,9 @@ Recommended additional input:
 
 ## Decision and evidence standard
 
-Tag every finding with evidence: `url`, `structured_data`, `feed_diagnostics`, `policy`, `export`, `screenshot`, `hypothesis`, or `needs_data`. Full vocabulary: `references/output-standard.md`.
+Tag every finding with evidence: `url`, `structured_data`, `feed_diagnostics`, `policy`, `export`, `screenshot`, `hypothesis`, or `needs_data`. Full vocabulary: `../references/output-standard.md`.
 
-Each finding also carries severity, confidence, business impact, effort, and owner decision.
+Rank findings by whether they misrepresent the product to a buyer, not by how modern the fix sounds.
 
 Anything about how a specific assistant ranks, selects, or displays products is a hypothesis. Say so. Vendor documentation changes faster than any checklist, so cite what was checked and when.
 
@@ -83,6 +83,8 @@ Return window, return shipping payer, delivery promise, warranty: findable as te
 Fix now, wait for platform, and not worth it yet, each with a reason.
 
 ### Missing data
+
+Record the date every check was run and the platform version behind it. This is the one skill in the pack whose subject moves month to month, so an undated readiness verdict is worth less than no verdict.
 
 ## Example input and output
 
