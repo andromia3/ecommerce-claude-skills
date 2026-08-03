@@ -1,4 +1,4 @@
-# E-commerce Operator Claude Skills
+# 20 Claude Skills for E-commerce Owners
 
 A pack of 20 practical Claude Skills for e-commerce owners, operators, and lean growth teams. The skills are designed to run without live platform integrations. They work from exports, screenshots, URLs, pasted reports, reviews, tickets, and store documentation.
 
